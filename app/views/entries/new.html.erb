@@ -1,0 +1,13 @@
+<h3>参加者選択</h3>
+<div><%= @match.name %></div>
+<hr>
+<%= form_with model: [@match, @entry] do |f| %>
+    <% @users.all.each do |user| %>
+      <div>
+          <%= f.check_box :user_ids, { multiple: true, include_hidden: false }, user.id %>
+          <%= user.name %>
+      </div>
+    <% end %>
+    
+    <%= f.submit "決定", class: "btn btn-primary" %>
+<% end %>

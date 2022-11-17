@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .container {
+     margin-top: 50px;
+ }
+ 
+ .dominion_logo {
+   height: 50px;
+ }

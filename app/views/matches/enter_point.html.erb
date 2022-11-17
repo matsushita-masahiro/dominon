@@ -1,0 +1,60 @@
+<h3>試合点数入力</h3>
+<h4><%= @match.name %></h4>
+<hr>
+
+<% width_col_2 = "col-xs-1 col-ms-1 col-md-1 col-lg-1" %>
+<%= form_with model: [@match_inning, @match_result],  url: match_enter_point_path(@match) do |f| %>
+  <section class="table-responsive">
+    <table class="table table-bordered table-striped">
+        
+      
+    
+    
+          <thead>
+            <tr>
+                <th class="<%= width_col_2 %>"></th>
+               <% @entries.each do |entry| %>
+                 <td scope="row" class="<%= width_col_2 %>"><%= entry.user.name %></td>
+               <% end %>
+            </tr>
+          </thead>
+        <% innings = @match_innings.count + 1 %>
+        <% innings.times do |i| %>
+          <tbody>
+               <%= f.hidden_field :inning_number, value: i+1 %>
+            <th class="<%= width_col_2 %>">Inning-<%= i+1 %></th>
+              <% if @match_innings.present? %>
+                 <% puts "match_innings count = #{@match_innings.count}" %>
+                <% @match_innings.each do |mi| %>
+                 <% puts "match_id in match_innings = #{mi.match_id} match_inning.id = #{mi.id}" %>
+                  <% @entries.each do |entry| %>
+                   <% puts "----entry user_id = #{entry.user_id}---#{MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id).point}" %>
+                   <% mr = MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id) %>
+                  <td><%= mr.nil? ? "--" : mr.point %></td>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% puts "121121212112121211121212" %>
+              <% end %>
+            
+            
+            
+               <% @entries.each_with_index do |entry, j| %>
+                <%= f.fields_for :match_results do |mr| %>
+                  <%= mr.hidden_field :user_id, value: entry.user_id %>
+                  <td class="<%= width_col_2 %>"><%= mr.number_field :point %></td>
+                <% end%>
+               <% end %>
+          </tbody>
+        <% end %>
+    </table>
+  </section>
+  <%= f.submit "Point決定" %>
+<% end %>  <!-- form end -->
+
+
+<% @entries.each do |entry| %>
+  <% MatchInning.where(match_id: @match.id).order(:inning_number).each do |match_inning|  %>
+    <% MatchResult.find_by(match_inning_id: match_inning.id, user_id: entry.id).point %>
+  <% end %>
+<% end %>

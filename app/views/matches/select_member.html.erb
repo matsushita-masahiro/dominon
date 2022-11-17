@@ -1,0 +1,15 @@
+<h2>メンバー選択</h2>
+<hr>
+<h3>試合</h3>
+試合名:<%= @match.name %>
+<hr>
+<%= form_with url: "" do |f| %>
+    <% @users.all.each do |user| %>
+      <div>
+          <%= f.check_box :user_ids, { multiple: true, include_hidden: false }, user.id %>
+          <%= user.name %>
+      </div>
+    <% end %>
+    
+    <%= f.submit "決定", class: "btn btn-primary" %>
+<% end %>

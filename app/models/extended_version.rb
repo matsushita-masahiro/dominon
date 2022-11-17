@@ -1,0 +1,2 @@
+class ExtendedVersion < ApplicationRecord
+end
