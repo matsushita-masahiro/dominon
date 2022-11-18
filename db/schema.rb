@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_06_063126) do
+ActiveRecord::Schema.define(version: 2022_11_18_172559) do
 
   create_table "entries", force: :cascade do |t|
     t.integer "match_id", null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_11_06_063126) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "omit_word"
   end
 
   create_table "match_innings", force: :cascade do |t|
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_11_06_063126) do
     t.time "start_time"
     t.time "end_time"
     t.date "held_date"
+    t.boolean "match_end", default: false, null: false
   end
 
   create_table "prefectures", force: :cascade do |t|

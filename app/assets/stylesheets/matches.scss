@@ -5,3 +5,46 @@
 .match-new-submit {
     margin-top: 20px;
 }
+
+th.inning_number {
+    width: 30px;
+}
+
+td.td_user_name {
+    text-align: center;
+}
+
+td.td_used_version {
+    text-align: center;
+}
+
+td.td_point_histrory {
+    text-align: center;
+}
+
+td.td_new_point {
+    text-align: center;
+}
+
+th.th_match_total {
+    text-align: center;
+}
+
+td.td_match_total {
+    text-align: center;
+}
+
+.extended_version_checkbox {
+    padding-right: 10px;
+}
+
+.end_match_button {
+    text-align: right;
+}
+
+.end_match_message {
+    font-weight: bold;
+    text-align: right;
+}
+
+

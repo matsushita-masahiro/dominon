@@ -7,4 +7,7 @@ class Match < ApplicationRecord
     has_many :match_innings, dependent: :destroy
     
     
+  
+    
+    
 end

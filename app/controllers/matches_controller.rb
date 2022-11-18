@@ -23,14 +23,27 @@ class MatchesController < ApplicationController
   
   def enter_point
     @match = Match.find(params[:match_id])
+    @extended_versions = ExtendedVersion.all
     @entries = @match.entries
     puts "~~~~~~~ @match = #{@match.id} --- @entries count #{@entries.count}"
     @match_innings = MatchInning.where(match_id: @match.id).order(:inning_number)
     puts "@match_innings = #{@match_innings.count}"
     # @match_innings = @match.match_innings
-    @match_inning = MatchInning.new(match_id: @match.id)
-    @match_result = @match_inning.match_results.build
+    unless @match.match_end
+      @match_inning = MatchInning.new(match_id: @match.id)
+      @match_result = @match_inning.match_results.build
+    end
     # @match_result = @MatchResult.new(match_inning_id: @match_inning)
+  end
+  
+  def input_point 
+    
+  end
+  
+  def match_end
+    @match = Match.find(params[:match_id])
+    @match.update(match_end: true)
+    redirect_to matches_path
   end
 
   def edit
@@ -54,6 +67,10 @@ class MatchesController < ApplicationController
     
     def match_params
       params.require(:match).permit(:name, :place, :start_time, :end_time, :held_date)
+    end
+    
+    def input_point_params 
+      params.require(:match_inning).permit(match_results_attributes: [:point])
     end
     
 end

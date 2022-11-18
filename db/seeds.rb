@@ -9,7 +9,7 @@
 # Entry.all.destroy_all
 # MatchInning.all.destroy_all
 # MatchResult.all.destroy_all
-# ex_version = ["基本","陰謀","収穫祭・錬金術","海辺","冒険","帝国"]
+# ex_version = ["基本","陰謀","収穫祭・錬金術","海辺","冒険","帝国","繁栄","異郷","暗黒時代","ギルド","夜想曲","ルネサンス","移動動物園","同盟"]
 # version = [[1,2],[1,3], [1,4],[3,4]]
 
 # ex_version.each_with_index do |ev, index|
@@ -58,4 +58,12 @@
 
 # [1,2,3].each do |user|
 #   MatchResult.create(match_inning_id: MatchInning.find(1).id, user_id: user, point: user*10)
+# end
+
+
+# ex_version_omit = [["基本", "基"],["陰謀","陰"],["収穫祭・錬金術","収錬"],["海辺","海"],["冒険","冒"],["帝国","帝"],
+#                   ["繁栄","繁"],["異郷","異"],["暗黒時代","暗"],["ギルド","ギ"],["夜想曲","夜"],["ルネサンス","ル"],["移動動物園","移"],["同盟","同"]]
+# ex_version_omit.each do |evo|
+#     ev = ExtendedVersion.find_by(name: evo[0])
+#     ev.update(omit_word: evo[1])
 # end

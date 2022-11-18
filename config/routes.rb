@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   
 
   resources :matches do
+    post 'match_end' => 'matches#match_end'
     get 'select_member' => 'matches#select_member'
     get 'enter_point' => 'matches#enter_point'
+    post 'enter_point' => 'matches#input_point'
     resources :entries
     resources :match_innings do 
       resources :match_results, only: [:create, :update]
