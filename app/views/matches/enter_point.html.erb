@@ -1,81 +1,83 @@
-<h3>試合点数入力</h3>
-<h4><%= @match.name %></h4>
-<hr>
-
-<% width_col_1 = "col-xs-1 col-ms-1 col-md-1 col-lg-1" %>
-<% width_col_2 = "col-xs-2 col-ms-2 col-md-2 col-lg-2" %>
-<%= form_with model: @match_inning,  url: "/matches/#{@match.id}/match_innings", local: true do |f| %>
-  <section class="table-responsive">
-    <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-                <th class="<%= width_col_1 %>"></th>
-                <td class="<%= width_col_2 %>"></td>
-               <% @entries.each do |entry| %>
-                 <td scope="row" class="<%= width_col_2 %> td_user_name"><%= entry.user.name %></td>
-               <% end %>
-            </tr>
-          </thead>
-          
-        <% innings = @match_innings.present? ? @match_innings.last.inning_number : 0 %>
-        <!--< innings.times do |i| %>-->
-          <tbody>
-              <% @match_innings.each do |mi| %>
-                <!--<= f.hidden_field :inning_number, value: mi.inning_number %>-->
-                <tr>
-                    <th style="text-align: center; width: 30px;"><%= mi.inning_number %></th>
-                    <td class="td_used_version">
-                     <% mi.used_versions_name.each do |vu| %>
-                        <span><%= vu %></span>
-                        <br>
-                      <% end %>                     
-                    </td>
-                       <% @entries.each do |entry| %>
-                         <% if mr = MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id) %>
-                           <td class="td_point_histrory"><%= MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id).point %></td>
-                         <% end %>
-                       <% end %>
-                </tr>
-              <% end %>
-                <% unless @match.match_end %>
+<div id="enter_point">
+  <h3 class="title">試合点数入力</h3>
+  <h4><%= @match.name %></h4>
+  <hr>
+  
+  <% width_col_1 = "col-xs-1 col-ms-1 col-md-1 col-lg-1" %>
+  <% width_col_2 = "col-xs-2 col-ms-2 col-md-2 col-lg-2" %>
+  <%= form_with model: @match_inning,  url: "/matches/#{@match.id}/match_innings", local: true do |f| %>
+    <section class="table-responsive">
+      <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                  <th class="<%= width_col_1 %>"></th>
+                  <td class="<%= width_col_2 %>"></td>
+                 <% @entries.each do |entry| %>
+                   <td scope="row" class="<%= width_col_2 %> td_user_name"><%= entry.user.name %></td>
+                 <% end %>
+              </tr>
+            </thead>
+            
+          <% innings = @match_innings.present? ? @match_innings.last.inning_number : 0 %>
+          <!--< innings.times do |i| %>-->
+            <tbody>
+                <% @match_innings.each do |mi| %>
+                  <!--<= f.hidden_field :inning_number, value: mi.inning_number %>-->
                   <tr>
-                    <th style="text-align: center;">
-                      <%= innings + 1 %>
-                      <!--<= f.collection_select(:version_used, @extended_versions, :id, :name, {:prompt => "Please Select a Sector"}, {:multiple => true}) %>-->
-                    </th>
-                    <td></td>
-                    <% @entries.each do |entry| %>
-                      <%= f.fields_for :match_results do |mr| %>
-                          <td class="td_new_point"><%= mr.hidden_field :user_id, value: entry.user_id %><%= mr.number_field :point, style: "width: 50%;" %></td>
-                      <% end%> 
-                    <% end %>
+                      <th style="text-align: center; width: 30px;"><%= mi.inning_number %></th>
+                      <td class="td_used_version">
+                       <% mi.used_versions_name.each do |vu| %>
+                          <span><%= vu %></span>
+                          <br>
+                        <% end %>                     
+                      </td>
+                         <% @entries.each do |entry| %>
+                           <% if mr = MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id) %>
+                             <td class="td_point_histrory"><%= MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id).point %></td>
+                           <% end %>
+                         <% end %>
                   </tr>
                 <% end %>
-                <tr style="background: #d3d3d39c;">
-                  <th class="th_match_total">合計</th>
-                  <td></td>
-                  <% @entries.each do |entry| %>
-                    <td class="td_match_total" style="color: #fff; background: #00bcd4;"><%= match_total_by_user(@match.id, entry.user_id) %></td>
+                  <% unless @match.match_end %>
+                    <tr>
+                      <th style="text-align: center;">
+                        <%= innings + 1 %>
+                        <!--<= f.collection_select(:version_used, @extended_versions, :id, :name, {:prompt => "Please Select a Sector"}, {:multiple => true}) %>-->
+                      </th>
+                      <td></td>
+                      <% @entries.each do |entry| %>
+                        <%= f.fields_for :match_results do |mr| %>
+                            <td class="td_new_point"><%= mr.hidden_field :user_id, value: entry.user_id %><%= mr.number_field :point, style: "width: 50%;" %></td>
+                        <% end%> 
+                      <% end %>
+                    </tr>
                   <% end %>
-                </tr>
-
-          </tbody>
-        <!--<end %>-->
-    </table>
-  </section>
-  <!-- 使用するversionを選択  -->
+                  <tr style="background: #d3d3d39c;">
+                    <th class="th_match_total">合計</th>
+                    <td></td>
+                    <% @entries.each do |entry| %>
+                      <td class="td_match_total" style="color: #fff; background: #00bcd4;"><%= match_total_by_user(@match.id, entry.user_id) %></td>
+                    <% end %>
+                  </tr>
+  
+            </tbody>
+          <!--<end %>-->
+      </table>
+    </section>
+    <!-- 使用するversionを選択  -->
+    <% unless @match.match_end %>
+      <div>
+        <% @extended_versions.all.each do |c| %>
+          <%= f.check_box :extended_version_ids, { multiple: true, include_hidden: false }, c.id %>
+          <span class="extended_version_checkbox"><%= c.name %></span>
+        <% end %>
+      </div>
+      <%= f.submit "Point入力", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>  <!-- form end -->
   <% unless @match.match_end %>
-    <div>
-      <% @extended_versions.all.each do |c| %>
-        <%= f.check_box :extended_version_ids, { multiple: true, include_hidden: false }, c.id %>
-        <span class="extended_version_checkbox"><%= c.name %></span>
-      <% end %>
-    </div>
-    <%= f.submit "Point入力", class: "btn btn-primary" %>
+    <div class="end_match_button"><%= link_to "マッチ終了", match_match_end_path(@match), method: :post, class: "btn btn-danger" %></div>
+  <% else %>
+    <div class="end_match_message">終了済マッチ</div>
   <% end %>
-<% end %>  <!-- form end -->
-<% unless @match.match_end %>
-  <div class="end_match_button"><%= link_to "マッチ終了", match_match_end_path(@match), method: :post, class: "btn btn-danger" %></div>
-<% else %>
-  <div class="end_match_message">終了済マッチ</div>
-<% end %>
+</div>
