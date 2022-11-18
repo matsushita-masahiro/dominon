@@ -1,0 +1,9 @@
+<div class="my-3" style="position: absolute; top: 80px; width: 100%;">
+  <% flash.each do |key, value| %>
+    <div class="alert <%= bs4_bgcolor_for(key) %> alert-dismissable fade show">
+      <%= value %>
+      <!--<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
+      <div style="text-align: right; float: right;"><button class="btn-close" data-bs-dismiss="alert"></button></div>
+    </div>
+  <% end %>
+</div>
