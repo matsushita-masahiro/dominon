@@ -51,7 +51,7 @@
                       <td></td>
                       <% @entries.each_with_index do |entry, i| %>
                         <%= f.fields_for :match_results do |mr| %>
-                            <td class="td_new_point"><%= mr.hidden_field :user_id, value: entry.user_id %><%= mr.number_field :point, value: (@match_results.present? ? @match_results[i.to_s][:point].to_i : nil), style: "width: 50%;" %></td>
+                            <td class="td_new_point"><%= mr.hidden_field :user_id, value: entry.user_id %><%= mr.number_field :point, value: (@match_results.present? ? @match_results[i.to_s][:point].to_i : nil), style: "width: 80%;" %></td>
                         <% end%> 
                       <% end %>
                     </tr>
