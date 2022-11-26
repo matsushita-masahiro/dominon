@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_18_172559) do
+ActiveRecord::Schema.define(version: 2022_11_26_153403) do
 
   create_table "entries", force: :cascade do |t|
     t.integer "match_id", null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_11_18_172559) do
     t.time "end_time"
     t.date "held_date"
     t.boolean "match_end", default: false, null: false
+    t.integer "unit_price"
   end
 
   create_table "prefectures", force: :cascade do |t|

@@ -2,6 +2,7 @@
   <h3 class="title">試合点数入力</h3>
   <h4><%= @match.name %></h4>
   <div><%= @match.created_at.strftime("%Y年%-m月%-d日 %a %H: %M") %></div>
+  <div>単価：<%= @match.unit_price %></div>
   <hr>
   <% width_col_1 = "col-xs-1 col-ms-1 col-md-1 col-lg-1" %>
   <% width_col_2 = "col-xs-2 col-ms-2 col-md-2 col-lg-2" %>
@@ -63,6 +64,13 @@
                       <td class="td_match_total" style="color: #fff; background: #00bcd4;"><%= match_total_by_user(@match.id, entry.user_id) %></td>
                     <% end %>
                   </tr>
+                  <tr style="background: #d3d3d39c;">
+                    <th class="th_match_total">合計</th>
+                    <td></td>
+                    <% @entries.each do |entry| %>
+                      <td class="td_match_total" style="color: #fff; background: #607d8b;"><%= @match.match_point_calc[entry.user_id] %></td>
+                    <% end %>
+                  </tr>                  
   
             </tbody>
           <!--<end %>-->

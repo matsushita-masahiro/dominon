@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#match-new {
+    width: 80%;
+    margin: 0 auto;
+    
+    .match-name {
+        width: 60%;
+    }
+    
+    .unit-price {
+        width: 60%;
+    }
+}
+
+
 .match-new-submit {
     margin-top: 20px;
 }

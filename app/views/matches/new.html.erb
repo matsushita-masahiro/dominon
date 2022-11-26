@@ -1,7 +1,10 @@
-<h2>試合登録</h2>
-<hr>
-<%= form_with model: @match do |f| %>
-  <div>name: <%= f.text_field :name %></div>
-  <div><%= f.submit class: "btn btn-success match-new-submit" %></div>
-<% end %>
+<div id="match-new">
+  <h2>試合登録</h2>
+  <hr>
+  <%= form_with model: @match do |f| %>
+    <div>name: <%= f.text_field :name, class: "form-control match-name" %></div>
+    <div>単価: <%= f.number_field :unit_price, class: "form-control unit-price"  %></div>
+    <div><%= f.submit class: "btn btn-success match-new-submit" %></div>
+  <% end %>
+</div>
 

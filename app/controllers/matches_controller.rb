@@ -67,7 +67,7 @@ class MatchesController < ApplicationController
     end
     
     def match_params
-      params.require(:match).permit(:name, :place, :start_time, :end_time, :held_date)
+      params.require(:match).permit(:name, :place, :start_time, :end_time, :held_date, :unit_price)
     end
     
     def input_point_params 
