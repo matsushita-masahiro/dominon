@@ -1,2 +1,32 @@
-<h1>MatchInnings#edit</h1>
-<p>Find me in app/views/match_innings/edit.html.erb</p>
+<div id="point-edit">
+<h3>Point 修正</h3>
+<h4><%= @match.name %></h4>
+<div><%= @match_inning.inning_number %>インイング</div>
+<div><%= @used_extended_versions_names.join(',') %></div>
+<hr>
+  <form action="/matches/<%= @match.id %>/match_innings/<%= @match_inning.id %>" method="post" >
+     <input type="hidden" name="_method" value="patch" />
+     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+     <% @extended_versions.each do |ev| %>
+         <input type="checkbox" id="checkbox<%= ev.id %>" name="version_used[]" value="<%= ev.id %> ">
+         <label for="checkbox" class="version_used_checkbox"><%= ev.name %></label>
+     <% end %>
+          <table class="table">
+            <tbody>
+                  <% @match_results.each_with_index do |mr| %>
+                    <tr>
+                      <td><%= mr.user.name %></td>
+                      <td><%= mr.point %></td>
+                      <td><input type="number" name="point[<%= mr.user_id %>]" class="form-control"></td>
+                      <!--<td><= f.number_field :point, class: "form-control"  %></td>-->
+                    </tr>
+                  <% end %>
+            </tbody>
+          </table>
+      <!--<div class="submit-area"><= f.submit "決定", class: "btn btn-primary" %></div>-->
+      <div class="submit-area"><input type="submit" value="決定" class="btn btn-success"></div>
+  </form>
+  <!--< end %>-->
+</div>
+
+

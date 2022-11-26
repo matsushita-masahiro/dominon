@@ -1,8 +1,8 @@
 <div id="enter_point">
   <h3 class="title">試合点数入力</h3>
   <h4><%= @match.name %></h4>
+  <div><%= @match.created_at.strftime("%Y年%-m月%-d日 %a %H: %M") %></div>
   <hr>
-  
   <% width_col_1 = "col-xs-1 col-ms-1 col-md-1 col-lg-1" %>
   <% width_col_2 = "col-xs-2 col-ms-2 col-md-2 col-lg-2" %>
   <%= form_with model: @match_inning,  url: "/matches/#{@match.id}/match_innings", local: true do |f| %>
@@ -20,12 +20,16 @@
             
           <% innings = @match_innings.present? ? @match_innings.last.inning_number : 0 %>
           <!--< innings.times do |i| %>-->
-            <tbody>
+            <tbody class="enter_point_tbody">
                 <% @match_innings.each do |mi| %>
                   <!--<= f.hidden_field :inning_number, value: mi.inning_number %>-->
                   <tr>
-                      <th style="text-align: center; width: 30px;"><%= mi.inning_number %></th>
-                      <td class="td_used_version">
+                      <% if @match.match_end %>
+                        <th style="text-align: center; width: 30px;"><%= mi.inning_number %></th>
+                      <% else %>
+                        <th style="text-align: center; width: 30px;"><%= link_to mi.inning_number, edit_match_match_inning_path(@match, mi), class: "enter-point-inning" %></th>
+                      <% end %>
+                      <td class="td_used_version" style="text-align: center; width: 30px;">
                        <% mi.used_versions_name.each do |vu| %>
                           <span><%= vu %></span>
                           <br>
@@ -45,9 +49,9 @@
                         <!--<= f.collection_select(:version_used, @extended_versions, :id, :name, {:prompt => "Please Select a Sector"}, {:multiple => true}) %>-->
                       </th>
                       <td></td>
-                      <% @entries.each do |entry| %>
+                      <% @entries.each_with_index do |entry, i| %>
                         <%= f.fields_for :match_results do |mr| %>
-                            <td class="td_new_point"><%= mr.hidden_field :user_id, value: entry.user_id %><%= mr.number_field :point, style: "width: 50%;" %></td>
+                            <td class="td_new_point"><%= mr.hidden_field :user_id, value: entry.user_id %><%= mr.number_field :point, value: (@match_results.present? ? @match_results[i.to_s][:point].to_i : nil), style: "width: 50%;" %></td>
                         <% end%> 
                       <% end %>
                     </tr>

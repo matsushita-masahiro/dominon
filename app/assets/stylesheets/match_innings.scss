@@ -1,3 +1,54 @@
 // Place all the styles related to the match_innings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.enter-point-inning {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background: lightgray;
+    text-decoration: none;
+    
+}
+
+.enter-point-inning:hover {
+    opacity: 0.7;
+}
+
+#point-edit {
+    width: 60%;
+    margin: 0 auto;
+    
+    .version_used_checkbox {
+        padding-right: 15px;
+    }
+    
+    table {
+        margin: 30px 0;
+    }
+    
+    td {
+        text-align: center;
+        width: 30%;
+        border: 1px lightgray solid;
+    }
+    
+    .submit-area {
+        text-align: right;
+        
+        input[type="submit"] {
+            margin: 0;
+        }
+    }
+    
+    .readonly {
+        width: 30%;
+        border: none;
+        outline: none;
+        vertical: center;
+        padding-top: 8px;
+    }
+}

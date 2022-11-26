@@ -1,5 +1,6 @@
 class MatchesController < ApplicationController
   
+  before_action :authenticate_user!
   before_action :get_match, only: [:show, :edit]
   
   def new
