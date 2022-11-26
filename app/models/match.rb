@@ -31,6 +31,9 @@ class Match < ApplicationRecord
     def match_point_calc
           hash = Hash.new
           self.match_point_total["user_point_total"].each {|user_id, differ|
+            if !self.unit_price.present?
+              unit_price = 1
+            end
             hash.store(user_id, differ*self.unit_price)
           }
         return hash
