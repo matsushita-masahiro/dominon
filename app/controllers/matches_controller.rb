@@ -44,7 +44,7 @@ class MatchesController < ApplicationController
   def match_end
     @match = Match.find(params[:match_id])
     @match.update(match_end: true)
-    redirect_to matches_path
+    redirect_to match_enter_point_path(@match)
   end
 
   def edit
