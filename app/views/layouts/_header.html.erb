@@ -20,7 +20,7 @@
           </a>
           <ul class="dropdown-menu">
             <% if user_signed_in? %>
-              <li><%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %></li>
+              <li><%= link_to "ログアウト", logout_path, class: "dropdown-item" %></li>
             <% else %>
               <li><%= link_to "ログイン", login_path, class: "dropdown-item" %></li>
               <li><%= link_to "登録", signup_path, class: "dropdown-item" %></li>

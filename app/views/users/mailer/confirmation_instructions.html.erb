@@ -1,5 +1,12 @@
-<p>Welcome <%= @email %>!</p>
+<% style = "border-radius: 5px; display: inline-block; text-decoretion: none; color: #fff; background: #00bcd4; width: 200px; height: 40px; line-height: 40px; text-align: center;" %>
+<p>こんにちは ! </p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>ユーザー登録を完了してください。</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to 'メールアドレス確認', {controller: 'users/confirmations', action: 'create', confirmation_token: @token}, :style => style, class: "confirm-link" %></p>
+
+<p>心当たりがない場合は、本メッセージは破棄してください。</p>
+
+<p>Club Dominion</p>
+
+
