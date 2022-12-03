@@ -4,7 +4,6 @@ class EntriesController < ApplicationController
     
     def new
        @users = User.all.order(:skill_level)
-       puts "試合名#{@match.id}"
        @entry = @match.entries.build
     end
     
@@ -25,4 +24,5 @@ class EntriesController < ApplicationController
       def entries_params
           params.require(:entry).permit(user_ids: [])
       end
+      
 end
