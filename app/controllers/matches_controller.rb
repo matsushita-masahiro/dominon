@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
   
   before_action :authenticate_user!
-  before_action :get_match, only: [:show, :edit]
+  before_action :get_match, only: [:show, :edit, :destroy]
   
   def new
     @match = Match.new
@@ -59,6 +59,17 @@ class MatchesController < ApplicationController
   def select_member
     @match = Match.find(params[:match_id])
     @users = User.all.order(:skill_level)
+  end
+  
+  def destroy
+    match_name = @match.name
+    if  @match.destroy
+      flash[:notice]= "#{match_name}をマッチを削除しました。"
+      redirect_to matches_path
+    else
+      flash[:error] = "#{match_name}をマッチを削除できませんでした。"
+      redirect_to match_enter_point_path(@match)
+    end
   end
   
   private

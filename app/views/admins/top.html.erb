@@ -1,0 +1,7 @@
+<h3>管理者メニュー</h3>
+<hr>
+<% @matches.each do |match| %>
+   <ul>
+       <li><%= link_to match.name, match_enter_point_path(match) %></li>
+   </ul>
+<% end %>

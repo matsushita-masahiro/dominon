@@ -52,3 +52,11 @@
         padding-top: 8px;
     }
 }
+
+@media screen and (max-width: 991px) {
+    
+        #point-edit {
+            width: 80%;
+            margin: 0 auto;
+        }
+}

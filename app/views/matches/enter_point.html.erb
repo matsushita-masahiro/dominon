@@ -92,4 +92,8 @@
   <% else %>
     <div class="end_match_message">終了済マッチ</div>
   <% end %>
+  <% if current_user.admin %>
+    <%= current_user.id %>
+    <div class="end_match_message"><%= link_to "マッチ削除", "/matches/#{@match.id}", method: :delete, class: "btn btn-link" %> </div>
+  <% end %>
 </div>

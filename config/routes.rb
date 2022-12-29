@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  get 'admins' => 'admins#top' 
+  
   resources :matches do
     post 'match_end' => 'matches#match_end'
     get 'select_member' => 'matches#select_member'
