@@ -94,6 +94,6 @@
   <% end %>
   <% if current_user.admin %>
     <%= current_user.id %>
-    <div class="end_match_message"><%= link_to "マッチ削除", "/matches/#{@match.id}", method: :delete, class: "btn btn-link" %> </div>
+    <div class="end_match_message"><%= link_to "マッチ削除", "/matches/#{@match.id}", method: :delete, data: { confirm: "【確認】#{@match.name}を削除してもよろしいですか？" }, class: "btn btn-link" %> </div>
   <% end %>
 </div>
