@@ -1,5 +1,11 @@
 <h1>User一覧</h1>
 <hr>
+<ul>
 <% @users.each do |user| %>
-  <div><%= link_to user.name, user_path(user) %></div>
+  <% if user_signed_in? && current_user.id == user.id %>
+    <li><%= link_to user.name, user_path(user) %></li>
+  <% else %>
+    <li><%= user.name %></li>
+  <% end %>
 <% end %>
+</ul>
