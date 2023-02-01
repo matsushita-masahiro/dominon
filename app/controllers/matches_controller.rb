@@ -19,7 +19,7 @@ class MatchesController < ApplicationController
   end
 
   def index
-    @matches = Match.all.order(created_at: :desc)
+    @matches = Match.all.order(created_at: :desc).page(params[:page]).per(10)
   end
   
   def enter_point

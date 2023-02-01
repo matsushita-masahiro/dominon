@@ -1,7 +1,21 @@
-<h2>試合一覧</h2>
+<h3>試合一覧（<%= @matches.count %>）</h3>
 <hr>
-<% @matches.each do |match| %>
-   <ul>
-       <li><%= link_to match.name, match_enter_point_path(match) %></li>
-   </ul>
-<% end %>
+<table class="table table-striped table-bordered matches">
+  <thead>
+    <tr>
+      <th scope="col">Match Name</th>
+      <th scope="col">Held</th>
+      <th scope="col">NOP</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @matches.each do |match| %>     
+       <tr>
+         <th scope="row"><%= link_to match.name.truncate(10), match_enter_point_path(match) %></th>
+         <td class="matches-match-created_at"><%= match.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+         <td class="matches-match-created_at"><%= match.entries.count %></td>
+       </tr>
+   <% end %>    
+  </tbody>
+</table>
+<%= paginate @matches, theme: 'bootstrap-5' %>
