@@ -36,9 +36,11 @@
                           <br>
                         <% end %>                     
                       </td>
+                         <% max_point = MatchResult.where(match_inning_id: mi.id).pluck(:point).max %>
                          <% @entries.each do |entry| %>
+                           <% user_point = MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id).point %>
                            <% if mr = MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id) %>
-                             <td class="td_point_histrory"><%= MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id).point %></td>
+                             <td class="td_point_histrory <%= user_point === max_point ? "victory_user_of_inning":"" %>"><%= MatchResult.find_by(match_inning_id: mi.id, user_id: entry.user_id).point %></td>
                            <% end %>
                          <% end %>
                   </tr>
