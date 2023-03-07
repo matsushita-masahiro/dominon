@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   
-
+  # root "users//sessions#new"
+  # get "/" => "users/sessions#new"
   get 'admins' => 'admins#top' 
+  
+  root 'home#top'
   
   resources :matches do
     post 'match_end' => 'matches#match_end'
@@ -35,6 +38,6 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show]
   
-  root 'home#top'
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

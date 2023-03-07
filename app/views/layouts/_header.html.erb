@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-secondary navbar-light">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-secondary navbar-light fixed-top">
+  <div class="container">
     <a class="navbar-brand" href="#">
       Club Dominion
     </a>
@@ -25,7 +25,7 @@
             <% if user_signed_in? %>
               <li><%= link_to "ログアウト", logout_path, class: "dropdown-item" %></li>
             <% else %>
-              <li><%= link_to "ログイン", login_path, class: "dropdown-item" %></li>
+              <li><%= link_to "ログイン", new_user_session_path, class: "dropdown-item" %></li>
               <li><%= link_to "登録", signup_path, class: "dropdown-item" %></li>
             <% end %>
           </ul>
