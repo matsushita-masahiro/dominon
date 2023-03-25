@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_one :admin
   
   
-  
+  # def played_matches
+  #   self.entries
+  # end
   
 end

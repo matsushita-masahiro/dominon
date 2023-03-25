@@ -16,20 +16,19 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/users" style="color: white;">Users</a>
-        </li>        
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="color: white;">
-            Account
-          </a>
-          <ul class="dropdown-menu">
-            <% if user_signed_in? %>
-              <li><%= link_to "ログアウト", logout_path, class: "dropdown-item" %></li>
-            <% else %>
-              <li><%= link_to "ログイン", new_user_session_path, class: "dropdown-item" %></li>
-              <li><%= link_to "登録", signup_path, class: "dropdown-item" %></li>
-            <% end %>
-          </ul>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users" style="color: white;">Mypage</a>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Logout", logout_path, class: "nav-link", style: "color: #ffeb3b;" %>
+          </li> 
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link", style: "color: #ffeb3b;" %>
+          </li>         
+        <% end %>
       </ul>
     </div>
   </div>

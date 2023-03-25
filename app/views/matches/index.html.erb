@@ -1,4 +1,7 @@
-<h3>試合一覧（<%= Match.all.count %>）</h3>
+<div class="matches-title">
+  <h3>試合一覧（<%= Match.all.count %>）</h3>
+  <div><%= link_to "Add Match", "/matches/new", class: "btn btn-success" %></div>
+</div>
 <hr>
 <table class="table table-striped table-bordered matches">
   <thead>
@@ -19,3 +22,13 @@
   </tbody>
 </table>
 <%= paginate @matches, theme: 'bootstrap-5' %>
+
+<style>
+.matches-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+    
+</style>
+
