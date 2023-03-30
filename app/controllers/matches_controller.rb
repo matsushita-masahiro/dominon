@@ -24,7 +24,9 @@ class MatchesController < ApplicationController
   
   def enter_point
     @match = Match.find(params[:match_id])
-    @extended_versions = ExtendedVersion.all
+    @extended_versions = ExtendedVersion.where.not(id: 3)
+    # 上は収穫祭・錬金術を別にするために収穫祭・錬金術を非表示にするため
+    # @extended_versions = ExtendedVersion.all
     @entries = @match.entries
     puts "~~~~~~~ @match = #{@match.id} --- @entries count #{@entries.count}"
     @match_innings = MatchInning.where(match_id: @match.id).order(:inning_number)
