@@ -26,6 +26,7 @@ class User < ApplicationRecord
       hash[match_inning_id] = hash[match_inning_id].sort_by { |_, v| -v }.to_h  # 例 {272 => {9=>75, 6=>66, 7=>58}} ０番目に1位
     end
     
+    
     return hash
   end
   
