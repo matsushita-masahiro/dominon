@@ -10,8 +10,10 @@ class MatchInning < ApplicationRecord
         ExtendedVersion.where(id: self.version_used).pluck(:omit_word)
     end
     
+
     
     
+
 
     
     
