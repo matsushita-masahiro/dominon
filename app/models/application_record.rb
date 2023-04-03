@@ -19,5 +19,19 @@ class ApplicationRecord < ActiveRecord::Base
       end
       return ranking     
   end
+  
+  def get_point_by_player_number(n)
+      if n == 2
+          get_point = [0,60,30]
+      elsif n == 3
+          get_point = [0,90,45,22.5]
+      elsif n >= 4 && n <= 6
+          get_point = [0,120,60,30,0,0,0]
+      else
+          get_point = [0,0,0,0,0,0,0]
+      end
+      
+      return get_point
+  end
 
 end

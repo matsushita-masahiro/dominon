@@ -92,6 +92,35 @@ class User < ApplicationRecord
     return ranked_array
   end
   
+  def rating
+    rating_point_total = 0
+    # (1位だったgameの回数*120＋2位だったgameの回数*60＋3位だったgameの回数*30)/全game数
+    # このuserが参加した全matchインスタンス
+    ranks = [1,2,3,4,5,6]
+    ranks.each do |rank|
+      self.rank_in_match_sorted(rank).each do |m|
+        if m.entries.count == 2 
+          rating_point_total = rating_point_total + get_point_by_player_number(2)[rank]
+        elsif m.entries.count == 3
+          rating_point_total = rating_point_total + get_point_by_player_number(3)[rank]
+        elsif m.entries.count == 4
+          rating_point_total = rating_point_total + get_point_by_player_number(4)[rank]
+        elsif m.entries.count == 5
+          rating_point_total = rating_point_total + get_point_by_player_number(5)[rank]
+        elsif m.entries.count == 6
+          rating_point_total = rating_point_total + get_point_by_player_number(6)[rank]
+        else
+          rating_point_total = rating_point_total + 0
+        end
+      end      
+    end
+    
+    rate = rating_point_total/7
+    
+    return rate
+
+  end
+  
   # matches_ranked_result_participatedの戻り値例は下記
   # {1=>{49=>{11=>101, 2=>60, 1=>49, 8=>0}, 50=>{1=>0, 2=>0, 3=>0, 7=>0}, 54=>{3=>56, 2=>33, 1=>12}, 55=>{1=>0, 2=>0, 3=>0}}} 
 
