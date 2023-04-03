@@ -9,9 +9,14 @@ class User < ApplicationRecord
   has_many :match_results
   
 
-  # あるuserが参加した全game
-  def participate_all_games
+  # あるuserが参加した全game結果
+  def participate_all_games_results
     self.match_results
+  end
+  
+  # あるuserが参加した全game(match_inning)
+  def participate_all_games
+    MatchInning.where(match_id: self.entries.pluck(:match_id))
   end
   
   def participate_all_matches
@@ -21,7 +26,7 @@ class User < ApplicationRecord
   def participate_all_games_result_hash_sorted
     hash = Hash.new { |h,k| h[k] = {} }
      # このuserが参加した全gameのid配列
-    self.participate_all_games.pluck(:match_inning_id).each do |match_inning_id|
+    self.participate_all_games_results.pluck(:match_inning_id).each do |match_inning_id|
       game_result = MatchResult.where(match_inning_id: match_inning_id).pluck(:user_id, :point).to_h
       hash[match_inning_id] = game_result.sort_by{ |_, v| -v }.to_h  # 例 {272 => {9=>75, 6=>66, 7=>58}} ０番目に1位
     end
@@ -63,13 +68,25 @@ class User < ApplicationRecord
   end
   
   # 1位や２位、3位だったmatch数 rank_numberが位の数字
-  def rank_in_matches(rank_number)
+  def rank_in_match_sorted(rank_number)
     ranked_array = []
     self.participate_all_matches.each do |match|
-       # match.rank_in_match例{1=>[6], 2=>[4], 3=>[5], 4=>[1, 2, 3], 5=>[], 6=>[]}
-       # match.rank_in_match例{1=>[11], 2=>[2], 3=>[1], 4=>[8], 5=>[], 6=>[]} 
-        if match.rank_in_match[rank_number].include?(self.id)
+       # match.rank_in_match_sorted例{1=>[6], 2=>[4], 3=>[5], 4=>[1, 2, 3], 5=>[], 6=>[]}
+       # match.rank_in_match_sorted例{1=>[11], 2=>[2], 3=>[1], 4=>[8], 5=>[], 6=>[]} 
+        if match.rank_in_match_sorted[rank_number].include?(self.id)
           ranked_array << match
+        end
+    end
+    return ranked_array
+  end
+  
+  def rank_in_game_sorted(rank_number)
+    ranked_array = []
+    self.participate_all_games.each do |game|
+       # match.rank_in_match_sorted例{1=>[6], 2=>[4], 3=>[5], 4=>[1, 2, 3], 5=>[], 6=>[]}
+       # match.rank_in_match_sorted例{1=>[11], 2=>[2], 3=>[1], 4=>[8], 5=>[], 6=>[]} 
+        if game.game_result_sorted[rank_number].include?(self.id)
+          ranked_array << game
         end
     end
     return ranked_array

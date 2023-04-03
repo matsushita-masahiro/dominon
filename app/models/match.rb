@@ -65,23 +65,8 @@ class Match < ApplicationRecord
       return hash
     end
     
-    def rank_in_match
-      ranking = {}
-      [1,2,3,4,5,6].each do |rank|
-        ranking[rank] = []
-      end
-      rank = 1
-      vp = self.ranked_hash_in_match[self.id].values[0]
-      self.ranked_hash_in_match[self.id].each_with_index do |ranked_hash, i|
-        if vp == ranked_hash[1]
-          ranking[rank] << ranked_hash[0]
-        else
-          rank = rank + 1
-          ranking[rank] << ranked_hash[0]
-        end
-        vp = ranked_hash[1]
-      end
-      return ranking
+    def rank_in_match_sorted
+      return rank_in_method(self.ranked_hash_in_match, self.id)
     end
     
     

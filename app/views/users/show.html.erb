@@ -8,11 +8,14 @@
   <hr>
   <h4 class="match-result">Match<span>Number of matches played : <%= current_user.entries.count %></span></h4>
   <div></div>
-  <div>Matches 1 place : <%= @user.rank_in_matches(1).count %></div>
-  <div>Matches 2 place : <%= @user.rank_in_matches(2).count %></div>
-  <div>Matches 3 place : <%= @user.rank_in_matches(3).count %></div>
-  <div>Matches 4 place & below : <%= @user.rank_in_matches(4).count + @user.rank_in_matches(5).count + @user.rank_in_matches(6).count %></div>
+  <div>1 place : <%= @user.rank_in_match_sorted(1).count %></div>
+  <div>2 place : <%= @user.rank_in_match_sorted(2).count %></div>
+  <div>3 place : <%= @user.rank_in_match_sorted(3).count %></div>
+  <div>4 place & below : <%= @user.rank_in_match_sorted(4).count + @user.rank_in_match_sorted(5).count + @user.rank_in_match_sorted(6).count %></div>
   <hr>
-  <h4>Game</h4>
-  <div>Games won : <%= @user.first_place_games.count %>/<%= @user.participate_all_games.count %></div>
-</div>
+  <h4 class="match-result">Game<span>Number of games played : <%= current_user.match_results.count %></span></h4>
+  <div>1 place : <%= @user.rank_in_game_sorted(1).count %></div>
+  <div>2 place : <%= @user.rank_in_game_sorted(2).count %></div>
+  <div>3 place : <%= @user.rank_in_game_sorted(3).count %></div>
+  <div>4 place & below : <%= @user.rank_in_game_sorted(4).count + @user.rank_in_game_sorted(5).count + @user.rank_in_game_sorted(6).count %></div>
+  </div>
