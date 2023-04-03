@@ -1,0 +1,21 @@
+<div id="mypage">
+  <h1 class="my-page">My page<span>rating:<%= @user.rating.round(2) %></span></h1>
+  <hr>
+  <ul>
+    <li><%= @user.name %></li>
+    <li><%= @user.nickname %></li>
+  </ul>
+  <hr>
+  <h4 class="match-result">Match<span>Number of matches played : <%= @user.entries.count %></span></h4>
+  <div></div>
+  <div>1 place : <%= @user.rank_in_match_sorted(1).count %></div>
+  <div>2 place : <%= @user.rank_in_match_sorted(2).count %></div>
+  <div>3 place : <%= @user.rank_in_match_sorted(3).count %></div>
+  <div>4 place & below : <%= @user.rank_in_match_sorted(4).count + @user.rank_in_match_sorted(5).count + @user.rank_in_match_sorted(6).count %></div>
+  <hr>
+  <h4 class="match-result">Game<span>Number of games played : <%= @user.match_results.count %></span></h4>
+  <div>1 place : <%= @user.rank_in_game_sorted(1).count %></div>
+  <div>2 place : <%= @user.rank_in_game_sorted(2).count %></div>
+  <div>3 place : <%= @user.rank_in_game_sorted(3).count %></div>
+  <div>4 place & below : <%= @user.rank_in_game_sorted(4).count + @user.rank_in_game_sorted(5).count + @user.rank_in_game_sorted(6).count %></div>
+  </div>

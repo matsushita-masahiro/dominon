@@ -3,7 +3,7 @@
 <ul>
 <% @users.each do |user| %>
   <% if user_signed_in? && current_user.id == user.id %>
-    <li><%= link_to user.name, user_path(user) %></li>
+    <li><%= link_to user.name, mypage_users_path %></li>
   <% else %>
     <li><%= user.name %></li>
   <% end %>

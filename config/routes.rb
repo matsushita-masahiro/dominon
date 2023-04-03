@@ -36,7 +36,11 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
   
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    collection do
+      get "mypage", :to => "users#mypage"
+    end
+  end
   
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
