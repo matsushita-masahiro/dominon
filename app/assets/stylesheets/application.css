@@ -59,4 +59,12 @@
   opacity: 0.7
  }
  
+ #navbarNavDropdown > ul > li > a {
+  transition: 0.3s;
+ }
+ 
+ #navbarNavDropdown > ul > li > a:hover {
+  opacity: 0.7;
+ }
+ 
 
