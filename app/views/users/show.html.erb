@@ -1,10 +1,18 @@
-<h1>My page</h1>
-<hr>
-<ul>
-  <li><%= @user.name %></li>
-  <li><%= @user.nickname %></li>
-</ul>
-<hr>
-<!--<div>Number of matches played : <= current_user.entries.count %></div>-->
-<div>Matches won : <%= @user.first_place_matches.count %>/<%= current_user.entries.count %></div>
-<div>Games won : <%= @user.first_place_games.count %>/<%= @user.participate_all_games.count %></div>
+<div id="mypage">
+  <h1>My page</h1>
+  <hr>
+  <ul>
+    <li><%= @user.name %></li>
+    <li><%= @user.nickname %></li>
+  </ul>
+  <hr>
+  <h4 class="match-result">Match<span>Number of matches played : <%= current_user.entries.count %></span></h4>
+  <div></div>
+  <div>Matches 1 place : <%= @user.rank_in_matches(1).count %></div>
+  <div>Matches 2 place : <%= @user.rank_in_matches(2).count %></div>
+  <div>Matches 3 place : <%= @user.rank_in_matches(3).count %></div>
+  <div>Matches 4 place & below : <%= @user.rank_in_matches(4).count + @user.rank_in_matches(4).count + @user.rank_in_matches(4).count %></div>
+  <hr>
+  <h4>Game</h4>
+  <div>Games won : <%= @user.first_place_games.count %>/<%= @user.participate_all_games.count %></div>
+</div>

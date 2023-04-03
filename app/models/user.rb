@@ -19,19 +19,16 @@ class User < ApplicationRecord
   end
   
   def participate_all_games_result_hash_sorted
-    
     hash = Hash.new { |h,k| h[k] = {} }
      # このuserが参加した全gameのid配列
     self.participate_all_games.pluck(:match_inning_id).each do |match_inning_id|
       game_result = MatchResult.where(match_inning_id: match_inning_id).pluck(:user_id, :point).to_h
       hash[match_inning_id] = game_result.sort_by{ |_, v| -v }.to_h  # 例 {272 => {9=>75, 6=>66, 7=>58}} ０番目に1位
     end
-
     return hash
   end
   
   def first_place_games
-    
     array = []
     participate_all_games_result_hash_sorted = self.participate_all_games_result_hash_sorted
     participate_all_games_result_hash_sorted.each{|inning, result|
@@ -48,30 +45,38 @@ class User < ApplicationRecord
     hash = Hash.new { |h,k| h[k] = {} }
     matches_participated_in = self.participate_all_matches
     matches_participated_in.each do |match|
-      hash[self.id][match.id] = match.rank_in_match[match.id]
+      hash[self.id][match.id] = match.ranked_hash_in_match[match.id]
     end
-    
     return hash
-    # 
   end
+
   
   def first_place_matches
-    
-    first_place_count = 0
-    array = []
-    
+    ranked_array = []
     matches_ranked_result_user_participated = self.matches_ranked_result_participated
     matches_ranked_result_user_participated[self.id].each do |match_result|
         if match_result[1].keys[0] == self.id
-          array << Match.find_by(id: match_result[0])
+          ranked_array << Match.find_by(id: match_result[0])
         end
     end
-    
-    return array
-    
+    return ranked_array
   end
   
+  # 1位や２位、3位だったmatch数 rank_numberが位の数字
+  def rank_in_matches(rank_number)
+    ranked_array = []
+    self.participate_all_matches.each do |match|
+       # match.rank_in_match例{1=>[6], 2=>[4], 3=>[5], 4=>[1, 2, 3], 5=>[], 6=>[]}
+       # match.rank_in_match例{1=>[11], 2=>[2], 3=>[1], 4=>[8], 5=>[], 6=>[]} 
+        if match.rank_in_match[rank_number].include?(self.id)
+          ranked_array << match
+        end
+    end
+    return ranked_array
+  end
   
+  # matches_ranked_result_participatedの戻り値例は下記
+  # {1=>{49=>{11=>101, 2=>60, 1=>49, 8=>0}, 50=>{1=>0, 2=>0, 3=>0, 7=>0}, 54=>{3=>56, 2=>33, 1=>12}, 55=>{1=>0, 2=>0, 3=>0}}} 
 
   
   # あるマッチの中のgame
