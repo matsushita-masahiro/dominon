@@ -5,6 +5,6 @@
   <li><%= @user.nickname %></li>
 </ul>
 <hr>
-<div>Number of matches played : <%= current_user.entries.count %></div>
-<div>Matches won : <%= @user.first_place_matches.count %></div>
+<!--<div>Number of matches played : <= current_user.entries.count %></div>-->
+<div>Matches won : <%= @user.first_place_matches.count %>/<%= current_user.entries.count %></div>
 <div>Games won : <%= @user.first_place_games.count %>/<%= @user.participate_all_games.count %></div>
