@@ -1,5 +1,5 @@
 <div id="mypage">
-  <h1 class="my-page">My page<span>rating:<%= @user.rating %></span></h1>
+  <h1 class="my-page">My page<span>rating:<%= @user.rating.round(2) %></span></h1>
   <hr>
   <ul>
     <li><%= @user.name %></li>
