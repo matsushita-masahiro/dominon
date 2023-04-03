@@ -63,7 +63,7 @@
                     <th class="th_match_total">合計</th>
                     <td></td>
                     <% @entries.each do |entry| %>
-                      <td class="td_match_total" style="color: #fff; background: #00bcd4;"><%= match_total_by_user(@match.id, entry.user_id) %></td>
+                      <td class="td_match_total" style="color: #fff; background: #00bcd4;"><%= @match.match_total_by_user(entry.user_id) %></td>
                     <% end %>
                   </tr>
                   <tr style="background: #d3d3d39c;">

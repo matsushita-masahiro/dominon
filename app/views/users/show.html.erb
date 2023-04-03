@@ -6,5 +6,5 @@
 </ul>
 <hr>
 <div>Number of matches played : <%= current_user.entries.count %></div>
-<div>Matches won : **/<%= @user.participate_all_matches.count %></div>
-<div>Games won : <%= @user.first_place_of_games.count %>/<%= @user.participate_all_games.count %></div>
+<div>Matches won : <%= @user.first_place_matches.count %></div>
+<div>Games won : <%= @user.first_place_games.count %>/<%= @user.participate_all_games.count %></div>

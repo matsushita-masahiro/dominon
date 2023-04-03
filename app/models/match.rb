@@ -40,7 +40,31 @@ class Match < ApplicationRecord
         return hash
         
     end
+    
+    
+    def games_of_match
+      self.match_innings
+    end
+    
+ 
+    
+    def match_total_by_user(user_id)
+            match_innings_ids = self.match_innings.order(:inning_number).pluck(:id)
+            total = MatchResult.where(user_id: user_id, match_inning_id: match_innings_ids).pluck(:point).sum
+        return total
+    end
+    
+    def rank_in_match
+      hash = Hash.new { |h,k| h[k] = {} }  # { match.id => { user.id => total VP }}
       
+      participates = self.entries
+      participates.each do |user|
+        hash[self.id][user.user_id] =  self.match_total_by_user(user.user_id)  #このmatchでのあるuserの合計VP
+      end
+      hash[self.id] = hash[self.id].sort_by{ |_, v| -v }.to_h
+      return hash
+    end
+    
     
     
 end
