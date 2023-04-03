@@ -115,7 +115,7 @@ class User < ApplicationRecord
       end      
     end
     
-    rate = rating_point_total/7
+    rate = rating_point_total/participate_all_matches.count
     
     return rate
 
