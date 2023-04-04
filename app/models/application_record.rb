@@ -22,11 +22,11 @@ class ApplicationRecord < ActiveRecord::Base
   
   def get_point_by_player_number(n)
       if n == 2
-          get_point = [0,60,30]
+          get_point = [0,100,30]
       elsif n == 3
-          get_point = [0,90,45,22.5]
+          get_point = [0,100,40,0]
       elsif n >= 4 && n <= 6
-          get_point = [0,120,60,30,0,0,0]
+          get_point = [0,100,50,20,0,0,0]
       else
           get_point = [0,0,0,0,0,0,0]
       end
