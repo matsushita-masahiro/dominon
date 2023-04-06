@@ -1,6 +1,10 @@
 <main>
     <div class="top-page">
-      <img src="/image/dominion_top.png" >
+      <% if Rails.env.production? %>
+        <img src="/image/dominion_top.png" >
+      <%  elsif Rails.env.development? %>
+        <img src="/image/dev/no-image.png" >
+      <% end %>
       <div class="login-area">
         <div class="login-left"></div>
         <div class="login">
