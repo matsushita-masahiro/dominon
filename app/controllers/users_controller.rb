@@ -1,7 +1,18 @@
 class UsersController < ApplicationController
   
   def index
-    @users = User.all.order(created_at: :desc)
+    # rating順にsort
+    @users_hash = {}
+    @users = []
+    User.all.each do |user|
+      @users_hash[user.id] = user.rating
+    end
+    
+    @users_hash.sort_by { |_, v| v }.reverse.to_h
+    
+    @users = User.where(id: @users_hash.keys)
+    # logger.debug("~~~~~~~~ @users = #{@users}")
+    
   end
 
   def show
