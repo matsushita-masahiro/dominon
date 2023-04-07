@@ -115,8 +115,11 @@ class User < ApplicationRecord
       end      
     end
     
-    rate = rating_point_total/participate_all_matches.count
-    
+    if participate_all_matches.count === 0 || participate_all_matches.count.nil?
+      rate = 0
+    else  
+      rate = rating_point_total/participate_all_matches.count
+    end
     return rate
 
   end

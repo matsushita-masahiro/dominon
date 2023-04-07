@@ -1,11 +1,29 @@
-<h1>User一覧</h1>
-<hr>
-<ul>
-<% @users.each do |user| %>
-  <% if user_signed_in? && current_user.id == user.id %>
-    <li><%= link_to user.name, mypage_users_path %></li>
-  <% else %>
-    <li><%= user.name %></li>
-  <% end %>
-<% end %>
-</ul>
+<h1>Users</h1>
+<!--<hr>-->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">rating</th>
+      <th scope="col">matches</th>
+      <th scope="col">games</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <% unless user_signed_in? && current_user.id == user.id %>
+          <td scope="row"><%= link_to user.name, user_path(user) %></td>
+        <% else %>
+          <td scope="row"><%= user.name %></td>
+        <% end %>
+        <td><%= user.rating == 0 ? "==" : user.rating.round(2) %></td>
+        <td><%= user.entries.count == 0 ? "==" : user.entries.count %></td>
+        <td><%= user.match_results.count == 0 ? "==" : user.match_results.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
