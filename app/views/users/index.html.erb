@@ -3,6 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>#</th>
       <th scope="col">name</th>
       <th scope="col">rating</th>
       <th scope="col">matches</th>
@@ -10,8 +11,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+    <% @users.each_with_index do |user, i| %>
       <tr>
+        <td><%= i+1 %></td>
         <% if user_signed_in? && current_user.id == user.id %>
           <td scope="row"><%= link_to user.name, user_path(user) %></td>
         <% else %>
