@@ -1,5 +1,6 @@
 <h1>Users</h1>
 <!--<hr>-->
+<% current_page = (@users.current_page-1)*10 %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -13,19 +14,20 @@
   <tbody>
     <% @users.each_with_index do |user, i| %>
       <tr>
-        <td><%= i+1 %></td>
+        <td><%= current_page + i + 1  %></td>
         <% if user_signed_in? && current_user.id == user.id %>
           <td scope="row"><%= link_to user.name, user_path(user) %></td>
         <% else %>
-          <td scope="row"><%= user.name %></td>
+          <td scope="row"><%= link_to user.name, user_path(user) %></td>
         <% end %>
         <td><%= user.rating == 0 ? "==" : user.rating.round(2) %></td>
-        <td><%= user.entries.count == 0 ? "==" : user.entries.count %></td>
-        <td><%= user.match_results.count == 0 ? "==" : user.match_results.count %></td>
+        <td><%= (user.id == current_user.id || user.follow_each_other?(current_user)) ? user.entries.count : "=="  %></td>
+        <td><%= (user.id == current_user.id || user.follow_each_other?(current_user)) ? user.match_results.count : "=="  %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= paginate @users, theme: 'bootstrap-5' %>
 
 
 

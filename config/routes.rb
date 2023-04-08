@@ -40,7 +40,13 @@ Rails.application.routes.draw do
     collection do
       get "mypage", :to => "users#mypage"
     end
+    
+    member do
+      get :following, :followers
+    end
   end
+  
+  resources :relationships, only: [:create, :destroy]
   
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -20,7 +20,11 @@
 #mypage > .my-page > span {
     font-size: 19px;
     font-weight: 500;
-    padding-left: 50px;    
+    padding-left: 30px;    
+}
+
+#mypage .follow-btn, #mypage .unfollow-btn {
+    float: right;
 }
 
 
