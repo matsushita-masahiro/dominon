@@ -1,6 +1,6 @@
 <div id="mypage">
   <%= render 'follow_form' if user_signed_in? %>
-  <h1 class="my-page">My page<span>rating:<%= @user.rating.round(2) %></span></h1>
+  <h1 class="mypage-h1">My page<span>rating:<%= @user.rating.round(2) %></span></h1>
   <!--<hr>-->
   <ul>
     <li><%= @user.name %></li>
