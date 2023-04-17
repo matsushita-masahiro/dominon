@@ -38,6 +38,24 @@ class User < ApplicationRecord
     followers.include?(other_user)
   end
   
+  # 自分と相互フォローしている配列
+  def follow_each_others
+    users = Relationship.where(follower_id: self.id).pluck(:followed_id) & Relationship.where(followed_id: self.id).pluck(:follower_id)
+    return User.where(id: users)
+  end
+  
+  # こちらからだけフォロー
+  def following_only
+    following_only_users = Relationship.where(follower_id: self.id).pluck(:followed_id) - Relationship.where(followed_id: self.id).pluck(:follower_id)
+    return User.where(id: following_only_users)
+  end
+  
+  def followed_only
+    followed_only_users = Relationship.where(followed_id: self.id).pluck(:follower_id) - Relationship.where(follower_id: self.id).pluck(:followed_id)
+    return User.where(id: followed_only_users)
+  end  
+  # 相手からだけフォロー
+  
   # 相互フォローしていたらtrue
   def follow_each_other?(other_user)
     if self.following?(other_user) && self.followed?(other_user)

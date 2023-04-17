@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
     
 
-    logger.debug("~~~~~~~~ @users = #{@users}")
+    # logger.debug("~~~~~~~~ @users = #{@users}")
     
   end
 
